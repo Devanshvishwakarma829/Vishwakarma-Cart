@@ -664,3 +664,54 @@ if (currentProduct) {
     document.title =
         `${currentProduct.name} | Vishwakarma Cart`;
 }
+
+// ==========================================
+// PRODUCT SEARCH
+// ==========================================
+
+const searchInput = document.querySelector("#product-search");
+const searchButton = document.querySelector("#search-button");
+const productCards = document.querySelectorAll(".product-card");
+
+function searchProducts() {
+
+    if (!searchInput) return;
+
+    const searchText =
+        searchInput.value.toLowerCase().trim();
+
+    productCards.forEach(card => {
+
+        const productName =
+            card.querySelector("h3").textContent.toLowerCase();
+
+        const productCategory =
+            card.querySelector(".product-category").textContent.toLowerCase();
+
+        const matches =
+            productName.includes(searchText) ||
+            productCategory.includes(searchText);
+
+        card.style.display = matches ? "" : "none";
+    });
+}
+
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        searchProducts
+    );
+
+}
+
+
+if (searchButton) {
+
+    searchButton.addEventListener(
+        "click",
+        searchProducts
+    );
+
+}
