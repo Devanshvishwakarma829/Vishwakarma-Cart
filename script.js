@@ -156,36 +156,33 @@ function renderCart() {
     cartContainer.innerHTML = "";
 
     if (cart.length === 0) {
+    cartContainer.innerHTML = `
+        <div class="empty-cart">
 
-        cartContainer.innerHTML = `
-
-            <div class="empty-cart">
-
-                <div class="empty-cart-icon">
-                    🛒
-                </div>
-
-                <h3>Your cart is empty</h3>
-
-                <p>
-                    Looks like you haven't added anything yet.
-                </p>
-
-                <a
-                    href="index.html#products"
-                    class="empty-cart-btn"
-                >
-                    Start Shopping →
-                </a>
-
+            <div class="empty-cart-icon">
+                🛒
             </div>
 
-        `;
+            <h3>Your cart is empty</h3>
 
-        updateCartSummary();
+            <p>
+                Looks like you haven't added anything to your cart yet.
+                Explore our products and find something you love.
+            </p>
 
-        return;
-    }
+            <a
+                href="index.html#products"
+                class="empty-cart-btn"
+            >
+                Explore Products →
+            </a>
+
+        </div>
+    `;
+
+    updateCartSummary();
+    return;
+}
 
 
     cart.forEach((product, index) => {
