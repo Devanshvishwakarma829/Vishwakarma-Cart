@@ -412,3 +412,108 @@ function updateCartSummary() {
 // ==========================================
 
 updateCartCount();
+
+// ==========================================
+// PRODUCT DETAILS PAGE
+// ==========================================
+
+const productQuantity = document.querySelector("#product-quantity");
+const increaseProduct = document.querySelector("#increase-product");
+const decreaseProduct = document.querySelector("#decrease-product");
+const productAddCart = document.querySelector("#product-add-cart");
+
+let selectedQuantity = 1;
+
+
+// ==========================================
+// INCREASE PRODUCT QUANTITY
+// ==========================================
+
+if (increaseProduct) {
+
+    increaseProduct.addEventListener("click", () => {
+
+        selectedQuantity++;
+
+        productQuantity.textContent = selectedQuantity;
+
+    });
+
+}
+
+
+// ==========================================
+// DECREASE PRODUCT QUANTITY
+// ==========================================
+
+if (decreaseProduct) {
+
+    decreaseProduct.addEventListener("click", () => {
+
+        if (selectedQuantity > 1) {
+
+            selectedQuantity--;
+
+            productQuantity.textContent = selectedQuantity;
+
+        }
+
+    });
+
+}
+
+
+// ==========================================
+// ADD PRODUCT DETAILS TO CART
+// ==========================================
+
+if (productAddCart) {
+
+    productAddCart.addEventListener("click", () => {
+
+        const product = {
+
+            name: "Wireless Headphones",
+
+            price: "₹1,999",
+
+            category: "Electronics",
+
+            icon: "🎧"
+
+        };
+
+
+        const existingProduct = cart.find(
+            item => item.name === product.name
+        );
+
+
+        if (existingProduct) {
+
+            existingProduct.quantity += selectedQuantity;
+
+        } else {
+
+            cart.push({
+
+                ...product,
+
+                quantity: selectedQuantity
+
+            });
+
+        }
+
+
+        saveCart();
+
+        updateCartCount();
+
+        showNotification(
+            `${selectedQuantity} × ${product.name} added to cart 🛒`
+        );
+
+    });
+
+}
