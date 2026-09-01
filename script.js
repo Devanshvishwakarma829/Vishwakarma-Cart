@@ -1478,3 +1478,28 @@ if (buyNowBtn) {
         window.location.href = "checkout.html";
     });
 }
+
+/* =========================================================
+   PREMIUM NAVBAR — ACTIVE PAGE
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        const href = link.getAttribute("href");
+
+        if (!href) return;
+
+        const linkPage = href.split("#")[0];
+
+        if (
+            linkPage &&
+            linkPage !== "#" &&
+            linkPage === currentPage
+        ) {
+            link.classList.add("active");
+        }
+    });
+});
