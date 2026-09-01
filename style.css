@@ -3759,3 +3759,75 @@ body {
 .product-card .wishlist-btn:hover {
     transform: scale(1.08);
 }
+
+/* =========================================
+   PORTFOLIO POLISH — HERO SECTION
+   ========================================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+.hero h1 {
+    letter-spacing: -1.5px;
+}
+
+.hero h1,
+.hero p {
+    position: relative;
+}
+
+.hero-buttons a {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.hero-buttons a:hover {
+    transform: translateY(-3px);
+}
+
+.hero-buttons a:active {
+    transform: translateY(-1px);
+}
+
+.hero-stats {
+    margin-top: 28px;
+}
+
+.hero-stat {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.hero-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+.hero-visual {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.hero-visual:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
