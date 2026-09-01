@@ -3678,3 +3678,84 @@ body {
 .buy-now-btn:active {
     transform: scale(0.97);
 }
+
+/* =========================================
+   PORTFOLIO POLISH — PRODUCT CARDS
+   ========================================= */
+
+.product-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.product-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.45),
+        transparent 80%
+    );
+    transform: translateX(-100%);
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.product-card:hover::before {
+    opacity: 1;
+    animation: productCardShine 0.8s ease forwards;
+}
+
+@keyframes productCardShine {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.product-card .product-placeholder {
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+.product-card:hover .product-placeholder {
+    transform: scale(1.06);
+}
+
+.product-card .add-cart-btn {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.product-card .add-cart-btn:hover {
+    transform: translateY(-2px);
+}
+
+.product-card .wishlist-btn {
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.product-card .wishlist-btn:hover {
+    transform: scale(1.08);
+}
