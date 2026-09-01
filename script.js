@@ -1168,3 +1168,114 @@ function syncWishlistButtons() {
 
 // Run when page loads
 syncWishlistButtons();
+
+// ==========================================
+// CHECKOUT PAGE
+// ==========================================
+
+const checkoutItems = document.querySelector("#checkout-items");
+const checkoutSubtotal = document.querySelector("#checkout-subtotal");
+const checkoutDelivery = document.querySelector("#checkout-delivery");
+const checkoutTotal = document.querySelector("#checkout-total");
+
+if (checkoutItems) {
+    renderCheckout();
+}
+
+function renderCheckout() {
+    checkoutItems.innerHTML = "";
+
+    if (cart.length === 0) {
+        checkoutItems.innerHTML = `
+            <div class="empty-checkout">
+                <p>Your cart is empty.</p>
+                <a href="index.html#products">Continue Shopping →</a>
+            </div>
+        `;
+
+        if (checkoutSubtotal) checkoutSubtotal.textContent = "₹0";
+        if (checkoutDelivery) checkoutDelivery.textContent = "₹0";
+        if (checkoutTotal) checkoutTotal.textContent = "₹0";
+
+        return;
+    }
+
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        const price = parsePrice(item.price);
+        const itemTotal = price * item.quantity;
+
+        subtotal += itemTotal;
+
+        const checkoutItem = document.createElement("div");
+        checkoutItem.className = "checkout-item";
+
+        checkoutItem.innerHTML = `
+            <div class="checkout-item-icon">
+                ${item.icon || "🛍️"}
+            </div>
+
+            <div class="checkout-item-info">
+                <h3>${item.name}</h3>
+                <span>Qty: ${item.quantity}</span>
+            </div>
+
+            <div class="checkout-item-total">
+                ₹${itemTotal.toLocaleString("en-IN")}
+            </div>
+        `;
+
+        checkoutItems.appendChild(checkoutItem);
+    });
+
+    const delivery = subtotal >= 999 ? 0 : 49;
+    const total = subtotal + delivery;
+
+    checkoutSubtotal.textContent =
+        `₹${subtotal.toLocaleString("en-IN")}`;
+
+    checkoutDelivery.textContent =
+        delivery === 0
+            ? "FREE"
+            : `₹${delivery}`;
+
+    checkoutTotal.textContent =
+        `₹${total.toLocaleString("en-IN")}`;
+}
+
+// ==========================================
+// PLACE ORDER
+// ==========================================
+
+const checkoutForm = document.querySelector("#checkout-form");
+
+if (checkoutForm) {
+    checkoutForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (cart.length === 0) {
+            showNotification("Your cart is empty 🛒");
+            return;
+        }
+
+        const paymentMethod =
+            document.querySelector('input[name="payment"]:checked');
+
+        if (!paymentMethod) {
+            showNotification("Please select a payment method");
+            return;
+        }
+
+        showNotification("Order placed successfully 🎉");
+
+        localStorage.removeItem("vishwakarmaCart");
+        cart = [];
+
+        updateCartCount();
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 1200);
+    });
+}

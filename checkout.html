@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Vishwakarma Cart</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🛒</span>
+                <span>Vishwakarma <strong>Cart</strong></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Products</a>
+                <a href="cart.html">Cart</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a
+                    href="wishlist.html"
+                    class="nav-action"
+                    aria-label="Wishlist"
+                >
+                    ♥
+                </a>
+
+                <a
+                    href="cart.html"
+                    class="nav-action cart-btn"
+                    aria-label="Shopping cart"
+                >
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CHECKOUT ================= -->
+
+    <main class="checkout-page">
+
+        <div class="checkout-heading">
+
+            <span>SECURE CHECKOUT</span>
+
+            <h1>Complete Your Order</h1>
+
+            <p>
+                Enter your delivery details and review your order.
+            </p>
+
+        </div>
+
+
+        <div class="checkout-layout">
+
+
+            <!-- ================= CUSTOMER DETAILS ================= -->
+
+            <section class="checkout-card">
+
+                <div class="checkout-card-heading">
+
+                    <span class="checkout-step">
+                        01
+                    </span>
+
+                    <div>
+                        <h2>Delivery Details</h2>
+                        <p>Where should we deliver your order?</p>
+                    </div>
+
+                </div>
+
+
+                <form id="checkout-form">
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="full-name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="full-name"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter phone number"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            rows="4"
+                            placeholder="House / Flat / Street / Area"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                placeholder="Enter city"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="pincode">
+                                PIN Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                inputmode="numeric"
+                                maxlength="6"
+                                placeholder="6-digit PIN"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= PAYMENT ================= -->
+
+                    <div class="checkout-card-heading payment-heading">
+
+                        <span class="checkout-step">
+                            02
+                        </span>
+
+                        <div>
+                            <h2>Payment Method</h2>
+                            <p>Select how you'd like to pay.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="payment-options">
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="cod"
+                                checked
+                            >
+
+                            <span class="payment-option-content">
+
+                                <strong>
+                                    💵 Cash on Delivery
+                                </strong>
+
+                                <small>
+                                    Pay when your order arrives.
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="online"
+                            >
+
+                            <span class="payment-option-content">
+
+                                <strong>
+                                    💳 Online Payment
+                                </strong>
+
+                                <small>
+                                    Demo payment option.
+                                </small>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="place-order-btn"
+                    >
+                        🔒 Place Order
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- ================= ORDER SUMMARY ================= -->
+
+            <aside class="checkout-summary">
+
+                <div class="checkout-summary-header">
+
+                    <span>YOUR ORDER</span>
+
+                    <h2>Order Summary</h2>
+
+                </div>
+
+
+                <div
+                    id="checkout-items"
+                    class="checkout-items"
+                >
+                </div>
+
+
+                <div class="checkout-summary-line">
+                    <span>Subtotal</span>
+                    <strong id="checkout-subtotal">
+                        ₹0
+                    </strong>
+                </div>
+
+
+                <div class="checkout-summary-line">
+                    <span>Delivery</span>
+                    <strong id="checkout-delivery">
+                        ₹0
+                    </strong>
+                </div>
+
+
+                <div class="checkout-summary-total">
+
+                    <span>Total</span>
+
+                    <strong id="checkout-total">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="checkout-secure">
+
+                    🔒
+                    <span>
+                        Your order details are securely handled.
+                    </span>
+
+                </div>
+
+            </aside>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
