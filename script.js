@@ -715,3 +715,57 @@ if (searchButton) {
     );
 
 }
+
+// ==========================================
+// CATEGORY FILTERING
+// ==========================================
+
+const categoryCards =
+    document.querySelectorAll(".category-card");
+
+const allProductCards =
+    document.querySelectorAll(".product-card");
+
+
+categoryCards.forEach(categoryCard => {
+
+    categoryCard.addEventListener("click", event => {
+
+        event.preventDefault();
+
+        const selectedCategory =
+            categoryCard.dataset.category;
+
+        allProductCards.forEach(productCard => {
+
+            const productCategory =
+                productCard
+                    .querySelector(".product-category")
+                    .textContent
+                    .trim()
+                    .toLowerCase();
+
+            if (selectedCategory === "all") {
+
+                productCard.style.display = "";
+
+            } else if (productCategory === selectedCategory) {
+
+                productCard.style.display = "";
+
+            } else {
+
+                productCard.style.display = "none";
+            }
+
+        });
+
+        document
+            .querySelector("#products")
+            ?.scrollIntoView({
+                behavior: "smooth"
+            });
+
+    });
+
+});
