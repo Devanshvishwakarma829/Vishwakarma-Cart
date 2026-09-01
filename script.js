@@ -1054,3 +1054,117 @@ function moveWishlistToCart(index) {
     );
 
 }
+
+// ==========================================
+// PRODUCT DETAILS WISHLIST
+// ==========================================
+
+const detailWishlistButton =
+    document.querySelector("#detail-wishlist-btn");
+
+if (detailWishlistButton && currentProduct) {
+
+    const isAlreadyWishlisted =
+        wishlist.some(
+            item => item.name === currentProduct.name
+        );
+
+    if (isAlreadyWishlisted) {
+        detailWishlistButton.textContent = "♥";
+        detailWishlistButton.classList.add("active");
+    }
+
+
+    detailWishlistButton.addEventListener("click", () => {
+
+        const existingProduct =
+            wishlist.find(
+                item => item.name === currentProduct.name
+            );
+
+
+        if (existingProduct) {
+
+            wishlist = wishlist.filter(
+                item => item.name !== currentProduct.name
+            );
+
+            detailWishlistButton.textContent = "♡";
+            detailWishlistButton.classList.remove("active");
+
+            showNotification(
+                `${currentProduct.name} removed from wishlist`
+            );
+
+        } else {
+
+            wishlist.push({
+
+                name: currentProduct.name,
+                price: currentProduct.price,
+                category: currentProduct.category,
+                icon: currentProduct.icon
+
+            });
+
+            detailWishlistButton.textContent = "♥";
+            detailWishlistButton.classList.add("active");
+
+            showNotification(
+                `${currentProduct.name} added to wishlist ❤️`
+            );
+
+        }
+
+        saveWishlist();
+
+    });
+
+}
+
+// ==========================================
+// SYNC WISHLIST BUTTONS
+// ==========================================
+
+function syncWishlistButtons() {
+
+    const buttons =
+        document.querySelectorAll(".wishlist-btn");
+
+    buttons.forEach(button => {
+
+        const productCard =
+            button.closest(".product-card");
+
+        if (!productCard) return;
+
+        const productName =
+            productCard
+                .querySelector("h3")
+                .textContent
+                .trim();
+
+        const isWishlisted =
+            wishlist.some(
+                item => item.name === productName
+            );
+
+        if (isWishlisted) {
+
+            button.textContent = "♥";
+            button.classList.add("active");
+
+        } else {
+
+            button.textContent = "♡";
+            button.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
+// Run when page loads
+syncWishlistButtons();

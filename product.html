@@ -24,11 +24,17 @@
 
             <div class="search-box">
                 <input
-                    type="text"
-                    placeholder="Search products..."
-                    aria-label="Search products"
-                >
-                <button type="button">🔍</button>
+    type="text"
+    id="product-search"
+    placeholder="Search products..."
+    aria-label="Search products"
+>
+               <button
+    type="button"
+    id="search-button"
+>
+    🔍
+</button>
             </div>
 
             <nav class="nav-links">
@@ -73,7 +79,7 @@
             <span>›</span>
             <a href="index.html#products">Products</a>
             <span>›</span>
-            <span>Wireless Headphones</span>
+            <span id="breadcrumb-product">Wireless Headphones</span>
         </div>
 
 
@@ -185,11 +191,13 @@
 </button>
 
                     <button
-                        class="detail-wishlist-btn"
-                        type="button"
-                    >
-                        ♡
-                    </button>
+    class="detail-wishlist-btn"
+    type="button"
+    id="detail-wishlist-btn"
+    aria-label="Add to wishlist"
+>
+    ♡
+</button>
 
                 </div>
 
