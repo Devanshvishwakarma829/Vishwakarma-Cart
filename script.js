@@ -71,7 +71,7 @@ function showNotification(message) {
 // ADD TO CART
 // ==========================================
 
-function addToCart(product) {
+function addToCart(product, quantity = 1) {
 
     const existingProduct = cart.find(
         item => item.name === product.name
@@ -79,7 +79,7 @@ function addToCart(product) {
 
     if (existingProduct) {
 
-        existingProduct.quantity++;
+        existingProduct.quantity += quantity;
 
         showNotification(
             `${product.name} quantity increased`
@@ -89,7 +89,7 @@ function addToCart(product) {
 
         cart.push({
             ...product,
-            quantity: 1
+           quantity: quantity
         });
 
         showNotification(
@@ -129,7 +129,7 @@ addCartButtons.forEach(button => {
                 .textContent
         };
 
-        addToCart(product);
+        addToCart(product, selectedQuantity);
 
     });
 
@@ -1435,5 +1435,46 @@ if (checkoutForm) {
        setTimeout(() => {
        window.location.href = "success.html";
        }, 1200);
+    });
+}
+
+// ================= BUY NOW =================
+
+const buyNowBtn = document.querySelector("#buy-now-btn");
+
+if (buyNowBtn) {
+    buyNowBtn.addEventListener("click", () => {
+
+        if (!currentProduct) return;
+
+        const existingItem = cart.find(
+            item => item.id === productId
+        );
+
+        if (existingItem) {
+
+            existingItem.quantity =
+                Number(existingItem.quantity || 0) + selectedQuantity;
+
+        } else {
+
+            cart.push({
+                id: productId,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                icon: currentProduct.icon,
+                quantity: selectedQuantity
+            });
+
+        }
+
+        localStorage.setItem(
+            "vishwakarmaCart",
+            JSON.stringify(cart)
+        );
+
+        updateCartCount();
+
+        window.location.href = "checkout.html";
     });
 }

@@ -3597,3 +3597,84 @@ body {
         padding: 20px;
     }
 }
+
+/* ==========================================
+   PREMIUM PRODUCT ACTION
+========================================== */
+
+.product-details-info button,
+.add-to-cart-btn {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
+
+.product-details-info button:hover,
+.add-to-cart-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.product-details-info button:active,
+.add-to-cart-btn:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* Moving shine */
+.product-details-info button::after,
+.add-to-cart-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.product-details-info button:hover::after,
+.add-to-cart-btn:hover::after {
+    left: 140%;
+}
+
+/* ==========================================
+   BUY NOW BUTTON
+========================================== */
+
+.buy-now-btn {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 12px;
+    padding: 15px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    background: transparent;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.buy-now-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.buy-now-btn:active {
+    transform: scale(0.97);
+}
