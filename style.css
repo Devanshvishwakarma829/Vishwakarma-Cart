@@ -3831,3 +3831,69 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
 }
+
+/* =========================================
+   PORTFOLIO POLISH — CATEGORY CARDS
+   ========================================= */
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    cursor: pointer;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.category-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.35),
+        transparent 65%
+    );
+    transform: translateX(-120%);
+    opacity: 0;
+}
+
+.category-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.11);
+}
+
+.category-card:hover::after {
+    opacity: 1;
+    animation: categoryShine 0.8s ease forwards;
+}
+
+.category-card .category-icon {
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.1) translateY(-2px);
+}
+
+@keyframes categoryShine {
+    from {
+        transform: translateX(-120%);
+    }
+
+    to {
+        transform: translateX(120%);
+    }
+}
+
+/* Keyboard accessibility */
+.category-card:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
