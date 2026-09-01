@@ -769,3 +769,100 @@ categoryCards.forEach(categoryCard => {
     });
 
 });
+
+// ==========================================
+// WISHLIST
+// ==========================================
+
+let wishlist =
+    JSON.parse(localStorage.getItem("vishwakarmaWishlist")) || [];
+
+const wishlistButtons =
+    document.querySelectorAll(".wishlist-btn");
+
+
+function saveWishlist() {
+
+    localStorage.setItem(
+        "vishwakarmaWishlist",
+        JSON.stringify(wishlist)
+    );
+
+}
+
+
+wishlistButtons.forEach(button => {
+
+    button.addEventListener("click", event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const productCard =
+            button.closest(".product-card");
+
+        if (!productCard) return;
+
+
+        const productName =
+            productCard.querySelector("h3").textContent.trim();
+
+        const productPrice =
+            productCard
+                .querySelector(".price-row strong")
+                .textContent.trim();
+
+        const productCategory =
+            productCard
+                .querySelector(".product-category")
+                .textContent.trim();
+
+        const productIcon =
+            productCard
+                .querySelector(".product-placeholder")
+                .textContent.trim();
+
+
+        const existingProduct =
+            wishlist.find(
+                item => item.name === productName
+            );
+
+
+        if (existingProduct) {
+
+            wishlist = wishlist.filter(
+                item => item.name !== productName
+            );
+
+            button.textContent = "♡";
+
+            showNotification(
+                `${productName} removed from wishlist`
+            );
+
+        } else {
+
+            wishlist.push({
+
+                name: productName,
+                price: productPrice,
+                category: productCategory,
+                icon: productIcon
+
+            });
+
+            button.textContent = "♥";
+
+            showNotification(
+                `${productName} added to wishlist ❤️`
+            );
+
+        }
+
+
+        saveWishlist();
+
+    });
+
+});

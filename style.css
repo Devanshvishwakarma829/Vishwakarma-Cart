@@ -1918,3 +1918,19 @@ body {
     text-decoration: underline;
     text-underline-offset: 4px;
 }
+
+/* =========================
+   WISHLIST BUTTON
+========================= */
+
+.wishlist-btn {
+    transition: transform 0.2s ease;
+}
+
+.wishlist-btn:hover {
+    transform: scale(1.15);
+}
+
+.wishlist-btn.active {
+    transform: scale(1.1);
+}
