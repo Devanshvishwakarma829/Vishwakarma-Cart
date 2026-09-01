@@ -549,6 +549,13 @@ const products = {
         }
     ],
 
+    highlights: [
+    ["🎧", "Immersive Audio", "Enjoy a rich and comfortable listening experience."],
+    ["🔋", "Wireless Freedom", "Designed for convenient everyday listening."],
+    ["🎙️", "Clear Communication", "Useful for calls, meetings and entertainment."],
+    ["📦", "Secure Packaging", "Packed carefully for a safe delivery."]
+],
+
     description:
         "Enjoy an immersive audio experience with comfortable wireless headphones designed for everyday listening, entertainment and work."
 },
@@ -582,6 +589,13 @@ const products = {
         }
     ],
 
+    highlights: [
+    ["⌚", "Smart Features", "Useful features for everyday convenience."],
+    ["📱", "Stay Connected", "Keep up with important notifications."],
+    ["🏃", "Activity Tracking", "Designed to support your everyday activity."],
+    ["📦", "Secure Packaging", "Packed carefully for a safe delivery."]
+],
+
     description:
         "Stay connected with a stylish smart watch featuring useful everyday features, notifications and activity tracking."
 },
@@ -613,6 +627,14 @@ const products = {
         text: "Nice looking shoes and comfortable for daily activities."
     }
 ],
+
+        highlights: [
+    ["👟", "Everyday Comfort", "Designed for comfortable daily wear."],
+    ["✨", "Modern Design", "A clean style that works with casual outfits."],
+    ["🚶", "Daily Use", "Suitable for everyday activities and outings."],
+    ["📦", "Secure Packaging", "Packed carefully for a safe delivery."]
+],
+
         description:
             "Comfortable everyday sneakers designed for casual outings, daily activities and a modern streetwear look."
     },
@@ -643,7 +665,15 @@ const products = {
         rating: "★★★★★",
         text: "Clean design and comfortable to carry. Really happy with it."
     }
+],     
+        
+        highlights: [
+    ["🎒", "Spacious Storage", "Enough room for everyday essentials."],
+    ["🛡️", "Practical Design", "Built around everyday convenience."],
+    ["🏙️", "Urban Ready", "Perfectly suited for daily city use."],
+    ["📦", "Secure Packaging", "Packed carefully for a safe delivery."]
 ],
+
         description:
             "A practical urban backpack with a clean design, spacious storage and everyday convenience."
     }
@@ -689,6 +719,34 @@ if (reviewList && currentProduct) {
         `;
 
         reviewList.appendChild(reviewCard);
+    });
+}
+
+// ================= PRODUCT HIGHLIGHTS =================
+
+const highlightsGrid = document.querySelector(".highlights-grid");
+
+if (highlightsGrid && currentProduct) {
+
+    highlightsGrid.innerHTML = "";
+
+    const highlights = currentProduct.highlights || [];
+
+    highlights.forEach(highlight => {
+
+        const highlightCard = document.createElement("div");
+        highlightCard.className = "highlight-card";
+
+        highlightCard.innerHTML = `
+            <span>${highlight[0]}</span>
+
+            <div>
+                <strong>${highlight[1]}</strong>
+                <p>${highlight[2]}</p>
+            </div>
+        `;
+
+        highlightsGrid.appendChild(highlightCard);
     });
 }
 
