@@ -1,10 +1,5 @@
-// Vishwakarma Cart
-// JavaScript functionality will be added step-by-step.
-
-
 // ==========================================
 // VISHWAKARMA CART
-// Shopping Cart Functionality
 // ==========================================
 
 let cart = JSON.parse(localStorage.getItem("vishwakarmaCart")) || [];
@@ -12,21 +7,39 @@ let cart = JSON.parse(localStorage.getItem("vishwakarmaCart")) || [];
 const cartCount = document.querySelector(".cart-count");
 const addCartButtons = document.querySelectorAll(".add-cart-btn");
 
+
 // ==========================================
-// UPDATE CART COUNT
+// UPDATE NAVBAR CART COUNT
 // ==========================================
 
 function updateCartCount() {
-    const totalItems = cart.reduce((total, product) => {
-        return total + product.quantity;
-    }, 0);
+
+    if (!cartCount) return;
+
+    const totalItems = cart.reduce(
+        (total, product) => total + product.quantity,
+        0
+    );
 
     cartCount.textContent = totalItems;
 }
 
 
 // ==========================================
-// SHOW NOTIFICATION
+// SAVE CART
+// ==========================================
+
+function saveCart() {
+
+    localStorage.setItem(
+        "vishwakarmaCart",
+        JSON.stringify(cart)
+    );
+}
+
+
+// ==========================================
+// NOTIFICATION
 // ==========================================
 
 function showNotification(message) {
@@ -34,7 +47,6 @@ function showNotification(message) {
     const notification = document.createElement("div");
 
     notification.className = "cart-notification";
-
     notification.textContent = message;
 
     document.body.appendChild(notification);
@@ -56,7 +68,7 @@ function showNotification(message) {
 
 
 // ==========================================
-// ADD PRODUCT TO CART
+// ADD TO CART
 // ==========================================
 
 function addToCart(product) {
@@ -67,7 +79,7 @@ function addToCart(product) {
 
     if (existingProduct) {
 
-        existingProduct.quantity += 1;
+        existingProduct.quantity++;
 
         showNotification(
             `${product.name} quantity increased`
@@ -85,20 +97,16 @@ function addToCart(product) {
         );
     }
 
-    localStorage.setItem(
-        "vishwakarmaCart",
-        JSON.stringify(cart)
-    );
-
+    saveCart();
     updateCartCount();
 }
 
 
 // ==========================================
-// PRODUCT BUTTON EVENTS
+// PRODUCT BUTTONS
 // ==========================================
 
-addCartButtons.forEach((button) => {
+addCartButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
@@ -114,6 +122,10 @@ addCartButtons.forEach((button) => {
 
             category: productCard
                 .querySelector(".product-category")
+                .textContent,
+
+            icon: productCard
+                .querySelector(".product-placeholder")
                 .textContent
         };
 
@@ -122,6 +134,277 @@ addCartButtons.forEach((button) => {
     });
 
 });
+
+
+// ==========================================
+// CART PAGE
+// ==========================================
+
+const cartContainer = document.querySelector("#cart-container");
+
+if (cartContainer) {
+    renderCart();
+}
+
+
+// ==========================================
+// RENDER CART
+// ==========================================
+
+function renderCart() {
+
+    cartContainer.innerHTML = "";
+
+    if (cart.length === 0) {
+
+        cartContainer.innerHTML = `
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    🛒
+                </div>
+
+                <h3>Your cart is empty</h3>
+
+                <p>
+                    Looks like you haven't added anything yet.
+                </p>
+
+                <a
+                    href="index.html#products"
+                    class="empty-cart-btn"
+                >
+                    Start Shopping →
+                </a>
+
+            </div>
+
+        `;
+
+        updateCartSummary();
+
+        return;
+    }
+
+
+    cart.forEach((product, index) => {
+
+        const price = parsePrice(product.price);
+
+        const itemTotal = price * product.quantity;
+
+        const item = document.createElement("div");
+
+        item.className = "cart-item";
+
+        item.innerHTML = `
+
+            <div class="cart-item-image">
+                ${product.icon || "🛍️"}
+            </div>
+
+            <div class="cart-item-info">
+
+                <span class="cart-item-category">
+                    ${product.category}
+                </span>
+
+                <h3>${product.name}</h3>
+
+                <span class="cart-item-price">
+                    ${product.price}
+                </span>
+
+                <div class="quantity-control">
+
+                    <button
+                        type="button"
+                        onclick="decreaseQuantity(${index})"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${product.quantity}
+                    </span>
+
+                    <button
+                        type="button"
+                        onclick="increaseQuantity(${index})"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="cart-item-right">
+
+                <span class="cart-item-total">
+                    ₹${itemTotal.toLocaleString("en-IN")}
+                </span>
+
+                <button
+                    class="remove-item"
+                    type="button"
+                    onclick="removeItem(${index})"
+                >
+                    Remove
+                </button>
+
+            </div>
+
+        `;
+
+        cartContainer.appendChild(item);
+
+    });
+
+
+    updateCartSummary();
+}
+
+
+// ==========================================
+// CONVERT PRICE
+// ==========================================
+
+function parsePrice(price) {
+
+    return Number(
+        price.replace(/[₹,]/g, "")
+    );
+
+}
+
+
+// ==========================================
+// INCREASE QUANTITY
+// ==========================================
+
+function increaseQuantity(index) {
+
+    cart[index].quantity++;
+
+    saveCart();
+
+    renderCart();
+
+    updateCartCount();
+}
+
+
+// ==========================================
+// DECREASE QUANTITY
+// ==========================================
+
+function decreaseQuantity(index) {
+
+    if (cart[index].quantity > 1) {
+
+        cart[index].quantity--;
+
+    } else {
+
+        cart.splice(index, 1);
+    }
+
+    saveCart();
+
+    renderCart();
+
+    updateCartCount();
+}
+
+
+// ==========================================
+// REMOVE PRODUCT
+// ==========================================
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+
+    renderCart();
+
+    updateCartCount();
+}
+
+
+// ==========================================
+// CART SUMMARY
+// ==========================================
+
+function updateCartSummary() {
+
+    const subtotalElement =
+        document.querySelector("#cart-subtotal");
+
+    const deliveryElement =
+        document.querySelector("#cart-delivery");
+
+    const totalElement =
+        document.querySelector("#cart-total");
+
+    const itemsCountElement =
+        document.querySelector("#cart-items-count");
+
+
+    if (!subtotalElement) return;
+
+
+    const totalItems = cart.reduce(
+        (total, product) => total + product.quantity,
+        0
+    );
+
+
+    const subtotal = cart.reduce(
+        (total, product) => {
+
+            const price = parsePrice(product.price);
+
+            return total + price * product.quantity;
+
+        },
+        0
+    );
+
+
+    const delivery =
+        subtotal === 0
+            ? 0
+            : subtotal >= 999
+                ? 0
+                : 49;
+
+
+    const total = subtotal + delivery;
+
+
+    subtotalElement.textContent =
+        `₹${subtotal.toLocaleString("en-IN")}`;
+
+    deliveryElement.textContent =
+        delivery === 0
+            ? "FREE"
+            : `₹${delivery}`;
+
+    totalElement.textContent =
+        `₹${total.toLocaleString("en-IN")}`;
+
+
+    if (itemsCountElement) {
+
+        itemsCountElement.textContent =
+            `${totalItems} ${totalItems === 1 ? "item" : "items"}`;
+
+    }
+}
 
 
 // ==========================================

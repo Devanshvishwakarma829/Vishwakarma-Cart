@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart | Vishwakarma Cart</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🛒</span>
+                <span>Vishwakarma <strong>Cart</strong></span>
+            </a>
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    aria-label="Search products"
+                >
+
+                <button type="button">🔍</button>
+            </div>
+
+            <nav class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="index.html#products">Products</a>
+
+                <a href="index.html#categories">Categories</a>
+
+                <a href="#" class="active">Cart</a>
+
+            </nav>
+
+            <div class="nav-actions">
+
+                <button class="nav-action" type="button">
+                    ♡
+                </button>
+
+                <a href="cart.html" class="nav-action cart-btn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+
+                <button class="login-btn" type="button">
+                    Login
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CART ================= -->
+
+    <main class="cart-page">
+
+        <div class="cart-header">
+
+            <div>
+                <span class="cart-label">YOUR SHOPPING</span>
+
+                <h1>Shopping Cart</h1>
+
+                <p>
+                    Review your selected products before checkout.
+                </p>
+            </div>
+
+            <a href="index.html#products" class="continue-shopping">
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+
+        <div class="cart-layout">
+
+            <!-- CART ITEMS -->
+
+            <section class="cart-items">
+
+                <div class="cart-items-header">
+                    <span>Your Items</span>
+                    <span id="cart-items-count">0 items</span>
+                </div>
+
+                <div id="cart-container">
+
+                    <!-- Products will be inserted using JavaScript -->
+
+                </div>
+
+            </section>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <aside class="cart-summary">
+
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong id="cart-subtotal">₹0</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <strong id="cart-delivery">₹0</strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="cart-total">₹0</strong>
+                </div>
+
+                <button class="checkout-btn" type="button">
+                    Proceed to Checkout →
+                </button>
+
+                <p class="secure-note">
+                    🔒 Secure checkout
+                </p>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
