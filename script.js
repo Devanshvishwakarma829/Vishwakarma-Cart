@@ -521,32 +521,70 @@ if (productAddCart) {
 const products = {
 
     headphones: {
-        name: "Wireless Headphones",
-        category: "ELECTRONICS",
-        price: "₹1,999",
-        oldPrice: "₹2,499",
-        discount: "20% OFF",
-        saving: "Save ₹500",
-        rating: "4.8",
-        reviews: "128 reviews",
-        icon: "🎧",
-        description:
-            "Enjoy an immersive audio experience with comfortable wireless headphones designed for everyday listening, entertainment and work."
-    },
+    name: "Wireless Headphones",
+    category: "ELECTRONICS",
+    price: "₹1,999",
+    oldPrice: "₹2,499",
+    discount: "20% OFF",
+    saving: "Save ₹500",
+    rating: "4.8",
+    reviews: "128 reviews",
+    icon: "🎧",
+
+    reviewData: [
+        {
+            name: "Rahul S.",
+            rating: "★★★★★",
+            text: "Great product quality and the overall experience is excellent."
+        },
+        {
+            name: "Aditya K.",
+            rating: "★★★★★",
+            text: "Really good value for the price. Delivery was also smooth."
+        },
+        {
+            name: "Priya M.",
+            rating: "★★★★☆",
+            text: "Nice design and useful for everyday use. Happy with the purchase."
+        }
+    ],
+
+    description:
+        "Enjoy an immersive audio experience with comfortable wireless headphones designed for everyday listening, entertainment and work."
+},
 
     watch: {
-        name: "Smart Watch",
-        category: "ELECTRONICS",
-        price: "₹2,999",
-        oldPrice: "₹3,499",
-        discount: "15% OFF",
-        saving: "Save ₹500",
-        rating: "4.7",
-        reviews: "94 reviews",
-        icon: "⌚",
-        description:
-            "Stay connected with a stylish smart watch featuring useful everyday features, notifications and activity tracking."
-    },
+    name: "Smart Watch",
+    category: "ELECTRONICS",
+    price: "₹2,999",
+    oldPrice: "₹3,499",
+    discount: "15% OFF",
+    saving: "Save ₹500",
+    rating: "4.7",
+    reviews: "94 reviews",
+    icon: "⌚",
+
+    reviewData: [
+        {
+            name: "Aman R.",
+            rating: "★★★★★",
+            text: "The watch looks great and works really well for everyday use."
+        },
+        {
+            name: "Neha S.",
+            rating: "★★★★☆",
+            text: "Good features and stylish design. Happy with the purchase."
+        },
+        {
+            name: "Rohit K.",
+            rating: "★★★★★",
+            text: "Really useful smart watch and good value for the price."
+        }
+    ],
+
+    description:
+        "Stay connected with a stylish smart watch featuring useful everyday features, notifications and activity tracking."
+},
 
     sneakers: {
         name: "Everyday Sneakers",
@@ -558,6 +596,23 @@ const products = {
         rating: "4.9",
         reviews: "216 reviews",
         icon: "👟",
+        reviewData: [
+    {
+        name: "Arjun P.",
+        rating: "★★★★★",
+        text: "Very comfortable sneakers with a clean and modern design."
+    },
+    {
+        name: "Karan M.",
+        rating: "★★★★★",
+        text: "Great for everyday use. The quality feels really good."
+    },
+    {
+        name: "Simran K.",
+        rating: "★★★★☆",
+        text: "Nice looking shoes and comfortable for daily activities."
+    }
+],
         description:
             "Comfortable everyday sneakers designed for casual outings, daily activities and a modern streetwear look."
     },
@@ -572,6 +627,23 @@ const products = {
         rating: "4.6",
         reviews: "76 reviews",
         icon: "🎒",
+        reviewData: [
+    {
+        name: "Vikas S.",
+        rating: "★★★★★",
+        text: "Spacious, practical and looks really premium for everyday use."
+    },
+    {
+        name: "Anjali R.",
+        rating: "★★★★☆",
+        text: "Good quality backpack with enough space for daily essentials."
+    },
+    {
+        name: "Mohit K.",
+        rating: "★★★★★",
+        text: "Clean design and comfortable to carry. Really happy with it."
+    }
+],
         description:
             "A practical urban backpack with a clean design, spacious storage and everyday convenience."
     }
@@ -588,6 +660,37 @@ const productId =
 
 const currentProduct = products[productId];
 
+// ==========================================
+// DYNAMIC PRODUCT REVIEWS
+// ==========================================
+
+const reviewList = document.querySelector("#review-list");
+
+if (reviewList && currentProduct) {
+
+    reviewList.innerHTML = "";
+
+    const reviews = currentProduct.reviewData || [];
+
+    reviews.forEach(review => {
+
+        const reviewCard = document.createElement("article");
+        reviewCard.className = "review-card";
+
+        reviewCard.innerHTML = `
+            <div class="review-top">
+                <strong>${review.name}</strong>
+                <span>${review.rating}</span>
+            </div>
+
+            <p>${review.text}</p>
+
+            <small>Verified Purchase</small>
+        `;
+
+        reviewList.appendChild(reviewCard);
+    });
+}
 
 // ==========================================
 // UPDATE PRODUCT DETAILS PAGE
