@@ -866,3 +866,191 @@ wishlistButtons.forEach(button => {
     });
 
 });
+
+// ==========================================
+// WISHLIST PAGE
+// ==========================================
+
+const wishlistContainer =
+    document.querySelector("#wishlist-container");
+
+
+if (wishlistContainer) {
+
+    renderWishlist();
+
+}
+
+
+// ==========================================
+// RENDER WISHLIST
+// ==========================================
+
+function renderWishlist() {
+
+    wishlistContainer.innerHTML = "";
+
+
+    if (wishlist.length === 0) {
+
+        wishlistContainer.innerHTML = `
+
+            <div class="empty-wishlist">
+
+                <div class="empty-wishlist-icon">
+                    ♡
+                </div>
+
+                <h3>
+                    Your wishlist is empty
+                </h3>
+
+                <p>
+                    Save products you love and find them here later.
+                </p>
+
+                <a
+                    href="index.html#products"
+                    class="empty-wishlist-btn"
+                >
+                    Explore Products →
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    wishlist.forEach((product, index) => {
+
+        const item =
+            document.createElement("article");
+
+        item.className = "wishlist-item";
+
+
+        item.innerHTML = `
+
+            <div class="wishlist-item-image">
+
+                <span class="wishlist-item-icon">
+                    ${product.icon || "🛍️"}
+                </span>
+
+            </div>
+
+
+            <div class="wishlist-item-content">
+
+                <span class="wishlist-item-category">
+                    ${product.category}
+                </span>
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+                <span class="wishlist-item-price">
+                    ${product.price}
+                </span>
+
+
+                <div class="wishlist-actions">
+
+                    <button
+                        class="move-cart-btn"
+                        type="button"
+                        onclick="moveWishlistToCart(${index})"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                    <button
+                        class="remove-wishlist-btn"
+                        type="button"
+                        onclick="removeFromWishlist(${index})"
+                        aria-label="Remove from wishlist"
+                    >
+                        🗑️
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        wishlistContainer.appendChild(item);
+
+    });
+
+}
+
+
+// ==========================================
+// REMOVE FROM WISHLIST
+// ==========================================
+
+function removeFromWishlist(index) {
+
+    const productName =
+        wishlist[index].name;
+
+    wishlist.splice(index, 1);
+
+    saveWishlist();
+
+    renderWishlist();
+
+    showNotification(
+        `${productName} removed from wishlist`
+    );
+
+}
+
+
+// ==========================================
+// MOVE WISHLIST PRODUCT TO CART
+// ==========================================
+
+function moveWishlistToCart(index) {
+
+    const product = wishlist[index];
+
+
+    const existingProduct =
+        cart.find(
+            item => item.name === product.name
+        );
+
+
+    if (existingProduct) {
+
+        existingProduct.quantity++;
+
+    } else {
+
+        cart.push({
+
+            ...product,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    showNotification(
+        `${product.name} added to cart 🛒`
+    );
+
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Wishlist | Vishwakarma Cart</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🛒</span>
+                <span>Vishwakarma <strong>Cart</strong></span>
+            </a>
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    aria-label="Search products"
+                >
+
+                <button type="button">
+                    🔍
+                </button>
+            </div>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Products</a>
+                <a href="index.html#categories">Categories</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a
+                    href="wishlist.html"
+                    class="nav-action wishlist-nav-btn"
+                    aria-label="Wishlist"
+                >
+                    ♥
+                </a>
+
+                <a
+                    href="cart.html"
+                    class="nav-action cart-btn"
+                    aria-label="Shopping cart"
+                >
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+
+                <button
+                    class="login-btn"
+                    type="button"
+                >
+                    Login
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= WISHLIST ================= -->
+
+    <main class="wishlist-page">
+
+        <div class="wishlist-heading">
+
+            <span>YOUR SAVED ITEMS</span>
+
+            <h1>My Wishlist <span>♥</span></h1>
+
+            <p>
+                Products you've saved for later.
+            </p>
+
+        </div>
+
+
+        <!-- PRODUCTS WILL BE INSERTED HERE -->
+
+        <section
+            id="wishlist-container"
+            class="wishlist-grid"
+        >
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
