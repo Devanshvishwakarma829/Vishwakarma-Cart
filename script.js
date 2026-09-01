@@ -1274,8 +1274,8 @@ if (checkoutForm) {
 
         updateCartCount();
 
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 1200);
+       setTimeout(() => {
+       window.location.href = "success.html";
+       }, 1200);
     });
 }
