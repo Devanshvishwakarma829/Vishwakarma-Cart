@@ -471,18 +471,17 @@ if (productAddCart) {
 
     productAddCart.addEventListener("click", () => {
 
-        const product = {
+       const product = {
 
-            name: "Wireless Headphones",
+    name: currentProduct.name,
 
-            price: "₹1,999",
+    price: currentProduct.price,
 
-            category: "Electronics",
+    category: currentProduct.category,
 
-            icon: "🎧"
+    icon: currentProduct.icon
 
-        };
-
+};
 
         const existingProduct = cart.find(
             item => item.name === product.name
@@ -516,4 +515,152 @@ if (productAddCart) {
 
     });
 
+}
+
+// ==========================================
+// DYNAMIC PRODUCT DATA
+// ==========================================
+
+const products = {
+
+    headphones: {
+        name: "Wireless Headphones",
+        category: "ELECTRONICS",
+        price: "₹1,999",
+        oldPrice: "₹2,499",
+        discount: "20% OFF",
+        saving: "Save ₹500",
+        rating: "4.8",
+        reviews: "128 reviews",
+        icon: "🎧",
+        description:
+            "Enjoy an immersive audio experience with comfortable wireless headphones designed for everyday listening, entertainment and work."
+    },
+
+    watch: {
+        name: "Smart Watch",
+        category: "ELECTRONICS",
+        price: "₹2,999",
+        oldPrice: "₹3,499",
+        discount: "15% OFF",
+        saving: "Save ₹500",
+        rating: "4.7",
+        reviews: "94 reviews",
+        icon: "⌚",
+        description:
+            "Stay connected with a stylish smart watch featuring useful everyday features, notifications and activity tracking."
+    },
+
+    sneakers: {
+        name: "Everyday Sneakers",
+        category: "FASHION",
+        price: "₹1,499",
+        oldPrice: "₹1,999",
+        discount: "25% OFF",
+        saving: "Save ₹500",
+        rating: "4.9",
+        reviews: "216 reviews",
+        icon: "👟",
+        description:
+            "Comfortable everyday sneakers designed for casual outings, daily activities and a modern streetwear look."
+    },
+
+    backpack: {
+        name: "Urban Backpack",
+        category: "FASHION",
+        price: "₹1,299",
+        oldPrice: "₹1,599",
+        discount: "18% OFF",
+        saving: "Save ₹300",
+        rating: "4.6",
+        reviews: "76 reviews",
+        icon: "🎒",
+        description:
+            "A practical urban backpack with a clean design, spacious storage and everyday convenience."
+    }
+
+};
+
+
+// ==========================================
+// GET PRODUCT FROM URL
+// ==========================================
+
+const productId =
+    new URLSearchParams(window.location.search).get("id");
+
+const currentProduct = products[productId];
+
+
+// ==========================================
+// UPDATE PRODUCT DETAILS PAGE
+// ==========================================
+
+if (currentProduct) {
+
+    const productName =
+        document.querySelector(".product-details-info h1");
+
+    const category =
+        document.querySelector(".detail-category");
+
+    const price =
+        document.querySelector(".detail-price strong");
+
+    const oldPrice =
+        document.querySelector(".detail-price del");
+
+    const discount =
+        document.querySelector(".detail-price span");
+
+    const description =
+        document.querySelector(".product-description");
+
+    const rating =
+        document.querySelector(".detail-rating span:nth-child(2)");
+
+    const reviews =
+        document.querySelector(".review-count");
+
+    const productIcon =
+        document.querySelector(".product-detail-icon");
+
+    const discountBadge =
+        document.querySelector(".detail-discount");
+
+
+    if (productName)
+        productName.textContent = currentProduct.name;
+
+    if (category)
+        category.textContent = currentProduct.category;
+
+    if (price)
+        price.textContent = currentProduct.price;
+
+    if (oldPrice)
+        oldPrice.textContent = currentProduct.oldPrice;
+
+    if (discount)
+        discount.textContent = currentProduct.saving;
+
+    if (description)
+        description.textContent = currentProduct.description;
+
+    if (rating)
+        rating.textContent = currentProduct.rating;
+
+    if (reviews)
+        reviews.textContent =
+            `(${currentProduct.reviews})`;
+
+    if (productIcon)
+        productIcon.textContent = currentProduct.icon;
+
+    if (discountBadge)
+        discountBadge.textContent = currentProduct.discount;
+
+
+    document.title =
+        `${currentProduct.name} | Vishwakarma Cart`;
 }
