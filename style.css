@@ -4439,3 +4439,93 @@ body {
         width: fit-content;
     }
 }
+
+/* =========================================================
+   EMPTY STATES + UX POLISH
+   ========================================================= */
+
+.empty-cart,
+.empty-wishlist,
+.no-results {
+    text-align: center;
+    padding: 60px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    background: rgba(255, 255, 255, 0.55);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.empty-cart:hover,
+.empty-wishlist:hover,
+.no-results:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+}
+
+.empty-cart h2,
+.empty-wishlist h2,
+.no-results h2 {
+    margin-bottom: 10px;
+}
+
+.empty-cart p,
+.empty-wishlist p,
+.no-results p {
+    margin-bottom: 22px;
+    opacity: 0.7;
+}
+
+.empty-cart a,
+.empty-wishlist a,
+.no-results a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.empty-cart a:hover,
+.empty-wishlist a:hover,
+.no-results a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+
+/* Quantity safety */
+
+.quantity-control button {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+/* Better form UX */
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    opacity: 0.55;
+}
+
+
+/* Better button interaction */
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:active,
+a:active {
+    transition-duration: 0.08s;
+}
