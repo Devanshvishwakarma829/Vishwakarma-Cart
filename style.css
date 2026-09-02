@@ -4529,3 +4529,135 @@ button:active,
 a:active {
     transition-duration: 0.08s;
 }
+
+/* =========================================================
+   FINAL UI CONSISTENCY
+   ========================================================= */
+
+/* Consistent interactive transitions */
+
+button,
+a,
+input,
+textarea,
+select {
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+/* Consistent button interaction */
+
+button:hover,
+a:hover {
+    cursor: pointer;
+}
+
+button:active,
+a:active {
+    transform: scale(0.98);
+}
+
+
+/* Consistent form focus */
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Prevent accidental horizontal overflow */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+/* Better image rendering */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Consistent section spacing */
+
+section {
+    scroll-margin-top: 90px;
+}
+
+
+/* Accessibility */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+
+/* Respect reduced-motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =========================================================
+   CHECKOUT — CONTINUE SHOPPING BUTTON
+   ========================================================= */
+
+.order-summary .continue-shopping,
+.order-summary .continue-shopping-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 14px;
+    padding: 0 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.45);
+    color: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.order-summary .continue-shopping:hover,
+.order-summary .continue-shopping-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(0, 0, 0, 0.13);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.order-summary .continue-shopping:active,
+.order-summary .continue-shopping-btn:active {
+    transform: scale(0.98);
+}
